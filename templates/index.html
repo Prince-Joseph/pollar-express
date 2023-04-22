@@ -1,0 +1,46 @@
+<main>
+
+  <p>Name</p>
+  <h1 id="name-change">Unknown</h1>
+  <button onclick="getData2()">ss</button>
+
+</main>
+
+<script>
+  const nameElement = document.getElementById("name-change");
+  nameElement.innerHTML = "lalalal";
+
+
+  async function getData() {
+    const response = await fetch('/question/create/');
+    const data = await response.json();
+    return data
+  }
+
+  getData();
+
+  function getData2() {
+
+    let iwannasee = "XD";
+   
+
+    fetch('/questions/')
+      .then(response => response.json())
+      .then(data => updatait(data));
+
+    function updatait(rcvd_data){
+    nameElement.innerText = ``;
+
+    for (const item of rcvd_data["questions"]){
+      const element = document.createElement("p");
+      element.innerHTML = item['question'];
+      nameElement.appendChild(element);
+    }
+    
+  }
+  }
+
+
+  getData2();
+
+</script>
