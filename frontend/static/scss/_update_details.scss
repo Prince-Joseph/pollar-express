@@ -1,0 +1,40 @@
+nav {
+    max-width: 320px;
+    margin-inline: auto;
+    margin-top: 5%;
+    color: $light-text-color;
+
+    a {
+        display: flex;
+        gap: 5px;
+        width:fit-content;
+    }
+}
+
+
+main {
+    margin-top: 50px;
+    padding: 20px;
+    color: $light-text-color;
+
+    .profile-container{
+        margin-top:40px;
+        display:flex;
+        flex-direction: column;
+        gap:10px;
+        img{
+            width:100px;
+            aspect-ratio:1;
+            border-radius:50%;
+        }
+        p{
+            font-size:16rem;
+            font-weight:600;
+        }
+    }
+}
+
+a {
+    color: $light-text-color;
+    text-decoration: none;
+}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<body>
+    <main>
+        <input id="pollId" type="hidden" value="{{poll.id}}">
+        <div class="header">
+            <div>Question #{{poll.id}}</div>
+            <div>show results </div>
+        </div>
+        <h1 id="question">{{poll.question}}</h1>
+        <div id="choices">
+            {% for choice in  poll.pollchoice_set.all %}
+                <div class="choice">
+                    <span >{{choice.value}} </span>|
+                    <span >#{{choice.id}} </span>|
+                    <span class="count">{{choice.count}} votes </span>
+                </div>
+            {% endfor %}
+        </div>
+
+        <br>
+
+        <div class="options">
+            <div>is question active: <span id="question-active">{{poll.is_active}}</span></div>
+            <div id="duration"> Duration {{poll.duration}} seconds</div>
+            
+            <button id="start">start</button>
+
+            <button id="stop">stop</button>
+            <button id="snooze">snooze</button>
+            <div id="timer"></div>
+
+        </div>
+    </main>
+</body>
+<script defer src="{% static 'scripts/questionManager.js' %}"></script>
+</html>

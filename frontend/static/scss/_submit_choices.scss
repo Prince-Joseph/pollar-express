@@ -1,0 +1,31 @@
+main {
+
+    max-width: 320px;
+    margin-inline: auto;
+    margin-top: 5%;
+
+    background-color: rgba(51, 65, 102, 0.2);
+    border: 1px solid rgba(51, 65, 102, 0.2);
+    border-radius: 5px;
+
+    .header {
+        color: #fff;
+        display: flex;
+        justify-content: space-between;
+        font-size: 16px;
+        font-weight: 700;
+        padding: 20px 15px;
+
+        p {
+            font-weight: 700;
+        }
+    }
+
+    .question {
+        padding: 0 15px;
+        font-weight: 700;
+        font-size: 38px;
+        color: #FFF;
+    }
+
+}

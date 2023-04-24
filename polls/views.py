@@ -32,8 +32,9 @@ def question_api(request, poll_id):
         "duration" : poll.duration,
         "isActive" : poll.is_active,
         "choices" : list(choices_dict),
-        "expireAt" : timezone.localtime(poll.expire_at),
+        "expireAt" : timezone.localtime(poll.expire_at) if poll.expire_at else  "not active",
         "count" : poll.count,
+        "timeLeft" : poll.time_left,
     }
 
     return JsonResponse(data = data)
@@ -57,6 +58,7 @@ def start_question(request, poll_id):
 def stop_question(request, poll_id):
     poll = Poll.objects.get(id = poll_id)
     poll.is_active = False
+    poll.expire_at = None
     poll.save()
 
     data = {
@@ -68,9 +70,9 @@ def stop_question(request, poll_id):
 
 def extend_duration_question(request, poll_id):
     poll = Poll.objects.get(id = poll_id)
-    poll.is_active = True
-    poll.expire_at = poll.expire_at + timezone.timedelta(seconds=10) 
-    poll.save()
+    if poll.is_active:    
+        poll.expire_at = poll.expire_at + timezone.timedelta(seconds=10) 
+        poll.save()
 
     data = {
         "questionId": poll_id,
@@ -112,14 +114,24 @@ def question_create_api(request):
 
 def vote(request, poll_choice_id):
     poll_choice = PollChoice.objects.get(id = poll_choice_id)
-    if not Vote.did_vote(request.user,poll_choice.question.id):
+    
+    if not Vote.did_vote(request.user, poll_choice.question.id):
         vote = Vote()
         vote.user = request.user
         vote.poll_choice = poll_choice
         vote.save()
-        return JsonResponse({"vote": vote.poll_choice.value})
-    else:
-        return JsonResponse({"vote": "voted"})
-    
+    existing_vote = Vote.objects.get(poll_choice=poll_choice,user=request.user)
+   
+    data = { 
+            "voteStatus": Vote.did_vote(request.user,poll_choice.question.id),
+            "prevVotedFor": existing_vote.poll_choice.value,
+            }
+    return JsonResponse(data = data)
+  
 
+def question_manager(request, poll_id):
+    question = Poll.objects.get(id = poll_id)
+    context= {}
+    context["poll"] = question
+    return render(request,"question_manager.html", context= context)
 

@@ -1,7 +1,7 @@
 var questionElement = document.querySelector("#question");
 var choicesElement = document.querySelector("#choices");
-function fetchUpdate() {
-    fetch('/question/1')
+function fetchUpdate(apiUrl) {
+    fetch(apiUrl)
         .then(function (res) { return res.json(); })
         .then(function (data) {
         updateUI(data);
@@ -9,10 +9,10 @@ function fetchUpdate() {
 }
 function updateUI(data) {
     var _a, _b;
-    questionElement.innerHTML = (_a = "".concat(data["question"], " ").concat(data["isActive"], "  ").concat(data["expireAt"])) !== null && _a !== void 0 ? _a : "";
+    questionElement.innerHTML = (_a = "".concat(data["question"], " ").concat(data["isActive"], " ").concat(data["expireAt"], " <br> ").concat(data["timeLeft"], " secs")) !== null && _a !== void 0 ? _a : "";
     var choices = data["choices"];
     choicesElement.innerHTML = "";
-    // create new elemt
+    // create new element
     for (var _i = 0, choices_1 = choices; _i < choices_1.length; _i++) {
         var choice = choices_1[_i];
         var choiceEl = document.createElement("p");
@@ -21,5 +21,5 @@ function updateUI(data) {
     }
 }
 var intervalId = window.setInterval(function () {
-    fetchUpdate();
-}, 500);
+    fetchUpdate('/question/1/');
+}, 1000);

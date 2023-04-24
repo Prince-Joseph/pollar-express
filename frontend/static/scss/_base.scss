@@ -1,20 +1,85 @@
-*{
+* {
     margin: 0;
     padding: 0;
+    font-family: $base-font;
+    box-sizing: border-box;
 }
 
-main{
-    background-color:#131929;
+body {
+    background-color: $background-color;
+    font-family: $base-font;
 }
 
-.btn-primary{
+.btns-container {
+    padding: 30px 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+}
+
+
+
+.btn-primary {
+
     width: 280px;
-    background-color: #fff;
-    color: #050C16;
+    min-height: 48px;
+    padding: 8px 12px;
+    word-wrap: break-word;
+    background-color: $light-text-color;
+    color:$dark-text-color;
     font-weight: 500;
     font-size: 20px;
+    border: 1px solid white;
+    border-radius: 5px;
+    outline: none;
+    box-shadow: none;
+    // text-align:left;
+
+    &:focus,
+    &:active,
+    &:hover {
+        border-width: 4px;
+        border-color: $gray-color;
+    }
 }
 
-.fonts{
-    font-family: Roboto;
+.active-btn {
+    background-color: $primary-color;
+    border-color: $primary-color;
+    color: $light-text-color;
+
+    &:focus,
+    &:active,
+    &:hover {
+        border-color: white;
+    }
+
+}
+
+.disabled-btn {
+    // border-width: 1px;
+    background-color: #283756;
+    border-color: $gray-color;
+    color: $light-text-color;
+    
+
+    &:focus,
+    &:active,
+    &:hover {
+        border-color: white;
+    }
+}
+
+.submit-btn {
+    color: $light-text-color;
+    background-color: $success-color;
+    border-width: 0px;
+
+    &:focus,
+    &:active,
+    &:hover {
+        border-width: 4px;
+        border-color: white;
+    }
 }

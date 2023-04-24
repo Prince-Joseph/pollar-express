@@ -1,9 +1,11 @@
 <main>
-
+  <form action="/accounts/google/login/" method="POST">
+    {% csrf_token %}
+    <button>LOGIN thru G</button>
+  </form>
   <p>Name</p>
   <h1 id="name-change">Unknown</h1>
   <button onclick="getData2()">ss</button>
-
 </main>
 
 <script>

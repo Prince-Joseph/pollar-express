@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 
+
 from users.models import CustomUser
 class Poll(models.Model):
     question = models.CharField(max_length=256)
@@ -28,6 +29,17 @@ class Poll(models.Model):
             count_ = poll_choice.count + count_
         return count_
 
+    @property
+    def time_left(self):
+        from datetime import datetime
+        current_time = timezone.now() 
+        if self.expire_at: 
+            timer =  self.expire_at - current_time  
+            minutes, seconds = divmod(timer.total_seconds(), 60)
+            return  f"{'{:02d}'.format(int(minutes))}:{'{:02d}'.format(int(seconds))}"
+        else:
+            return 0
+
 class PollChoice(models.Model):
     question = models.ForeignKey(Poll, on_delete=models.CASCADE)
     value = models.CharField(max_length=256)
@@ -47,10 +59,20 @@ class Vote(models.Model):
     voted_at = models.DateTimeField(auto_now_add=True)
 
     def did_vote(user, poll_id):
-        poll_choices = Poll.objects.get(id=poll_id).pollchoice_set.all()
-        try:
-            votes = Vote.objects.get(id__in=poll_choices.values_list('id'), user=user)
-        except Vote.DoesNotExist:
-            return False
-        else:
-            return True
+        question = Poll.objects.get(id=poll_id)
+        choices = PollChoice.objects.filter(question__id = poll_id)
+        choices_list = choices.values_list("id")
+        
+        votes = Vote.objects.filter(poll_choice__in = choices_list)
+        
+        for vote in votes:
+            if user == vote.user:
+                return True
+
+        return False
+        """
+        [1, 2]
+        1 - prince
+        2 - alekhya
+        1 - nams
+        """
