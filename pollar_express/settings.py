@@ -38,10 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     "django.contrib.sites",
-    
+
     'polls.apps.PollsConfig',
     'users.apps.UsersConfig',
-    
+
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
@@ -141,6 +141,8 @@ AUTH_USER_MODEL = "users.CustomUser"
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
 
+LOGIN_URL = 'login'
+
 AUTHENTICATION_BACKENDS = [
     "django.contrib.auth.backends.ModelBackend",
     "allauth.account.auth_backends.AuthenticationBackend",
@@ -159,6 +161,3 @@ SOCIALACCOUNT_PROVIDERS = {
 }
 
 SITE_ID = 2
-
-LOGIN_REDIRECT_URL = "/"
-LOGOUT_REDIRECT_URL = "/"

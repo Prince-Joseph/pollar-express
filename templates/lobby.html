@@ -1,0 +1,10 @@
+
+<title>Train Page</title>
+<div>Lobby
+    
+    <a href="{% url 'profile_update' %}">Profile Update</a>
+    <a href="{% url 'submit_poll' 1 %}">Active Question</a>
+    {% if request.user.is_staff %}
+        <a href="{% url 'questions' %}"> Goto Questions</a>
+    {% endif %}
+</div>

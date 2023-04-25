@@ -1,0 +1,18 @@
+<h1>Question Create</h1>
+<a href="{% url 'questions' %}">Back to Questions</a>
+<form action="" method="POST">
+    <input type="hidden" name="form_type" value="question">
+    {% csrf_token %}
+    {{ question_form.as_p }}
+    <button type="submit">Create Question</button>
+</form>
+<!-- We need take in the valuein the views foollow me -->
+<h1>
+    Add Choice
+</h1>
+
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ choice_form.as_p }}
+    <button type="submit">Create Choice</button>
+</form>

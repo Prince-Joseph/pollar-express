@@ -9,10 +9,11 @@
 </head>
 <body>
     <main>
+        <a href="{% url 'questions' %}">Back to Questions</a>
         <input id="pollId" type="hidden" value="{{poll.id}}">
         <div class="header">
             <div>Question #{{poll.id}}</div>
-            <div>show results </div>
+            <div> <a href="{% url 'poll_result' poll.id %}"> Show Live Results </a></div>
         </div>
         <h1 id="question">{{poll.question}}</h1>
         <div id="choices">

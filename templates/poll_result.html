@@ -1,0 +1,14 @@
+{% load static %}
+
+<html>
+    <a href="{% url 'questions' %}">Back to Questions</a>
+    <a href="{% url 'question_manager' poll.id %}">Back to Manager</a>
+
+    <div id="question">Question</div>
+    <div id="choices">
+
+    </div>
+</html>
+
+<script defer src="{% static 'scripts/question.js'%}">
+</script>

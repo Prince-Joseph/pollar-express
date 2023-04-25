@@ -1,0 +1,14 @@
+<a href="{% url 'lobby'%}">back to lobby</a>
+
+<div>
+    <h1>
+        Profile Update
+    </h1>
+
+    <a href="{% url 'lobby'%}">Save changes</a>
+
+    <form action="/accounts/logout/" method="POST">
+        {% csrf_token %}
+        <button>LOGout</button>
+    </form>
+</div>
