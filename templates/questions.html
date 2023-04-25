@@ -1,0 +1,14 @@
+<html>
+    <div id="question">Question</div>
+    <a href="{% url 'create_question' %}">Create Question</a>
+    {% for poll in questions %}
+    <hr>
+    <a href="{% url 'question_manager' poll.id %}">{{poll.question}}</a>
+    {{poll.is_active}}
+    {{ poll.created_at|timesince}}
+    {{poll.duration}}
+    <hr>
+    {% endfor %}
+
+    
+</html>
