@@ -1,14 +1,16 @@
 {% load static %}
-
 <html>
+
+    <input id="pollId" type="hidden" value="{{poll.id}}"/>
+
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+
     <a href="{% url 'questions' %}">Back to Questions</a>
+
     <a href="{% url 'question_manager' poll.id %}">Back to Manager</a>
 
     <div id="question">Question</div>
-    <div id="choices">
+    <div id="choices"></div>
 
-    </div>
+    <script defer src="{% static 'scripts/question.js'%}"></script>
 </html>
-
-<script defer src="{% static 'scripts/question.js'%}">
-</script>
