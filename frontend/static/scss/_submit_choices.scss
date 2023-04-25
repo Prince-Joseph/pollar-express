@@ -1,12 +1,6 @@
-main {
-
-    max-width: 320px;
-    margin-inline: auto;
+#submit-page {
     margin-top: 5%;
-
-    background-color: rgba(51, 65, 102, 0.2);
-    border: 1px solid rgba(51, 65, 102, 0.2);
-    border-radius: 5px;
+    @extend %dark-background;
 
     .header {
         color: #fff;

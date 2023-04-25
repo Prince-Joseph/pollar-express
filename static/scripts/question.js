@@ -1,4 +1,5 @@
 var questionElement = document.querySelector("#question");
+//@ts-ignore
 var choicesElement = document.querySelector("#choices");
 function fetchUpdate(apiUrl) {
     fetch(apiUrl)

@@ -1,4 +1,5 @@
 const questionElement = document.querySelector("#question") as HTMLDivElement;
+//@ts-ignore
 const choicesElement = document.querySelector("#choices") as HTMLDivElement;
 
 
