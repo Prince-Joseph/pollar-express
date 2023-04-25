@@ -18,6 +18,9 @@
 </head>
 
 <body>
+    <!-- <div width="100%">
+        <img src="https://i.pinimg.com/originals/f2/7e/a7/f27ea7279398c6c7455aa76875f12fb8.gif" />
+    </div> -->
 
     <nav>
         <a href="#">
@@ -26,12 +29,47 @@
         </a>
     </nav>
 
-    <main>
+    <main id="profile-update">
         <span><a href="#">Home</a> / Profile</span>
-        <div class="profile-container">
+        <div class="profile-img-container">
             <img src="https://divedigital.id/wp-content/uploads/2022/07/2-Blank-PFP-Icon-Instagram.jpg" alt="">
-            <p class="user-gmail">Prince@gmail.com</p>
+            <p>prince@gmail.com</p>
         </div>
+        <div class="details-container">
+
+            <div class="container">
+                <div class="input-container">
+                    <input type="text" placeholder="Name">
+                </div>
+                <div class="message-container" id="msg1">
+                    <p>No special characters are allowed</p>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="input-container">
+                    <input type="text"  placeholder="Roll Number">
+                </div>
+                <div class="message-container" id="msg2">
+                    <p>No special characters are allowed</p>
+                    <p>Roll number format must be proper</p>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="input-container" >
+                    <input type="text" placeholder="Mobile Number">
+                </div>
+                <div class="message-container" id="msg3">
+                    <p>Length must be only 10 digits long</p>
+                </div>
+            </div>
+
+        </div>
+
+        <button class="btn-primary active-btn">Submit</button>
+            
+        
     </main>
 </body>
 

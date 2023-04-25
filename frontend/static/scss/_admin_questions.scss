@@ -1,0 +1,93 @@
+#admin_questions{
+    max-width:1190px;
+    margin-inline: auto;
+    margin-top: 100px;
+    display: grid;
+    grid-template-columns: 700px 200px;
+    column-gap:100px ;
+
+    .ques-container-header{
+        display: flex;
+        flex-direction: column;
+        gap:35px;
+        .header{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            h1{
+                font-size: 48px;
+                font-weight: 700;
+                color: #fff;
+            }
+            .active-btn{
+                padding : 8px 55px;
+                height: 40px;
+                border-radius: 5px;
+                border:none;
+            }
+        }
+
+        .ques-container{
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            border: 2px solid rgba(116, 116, 116, 1);
+            border-radius: 5px;
+            padding: 30px 24px;
+            .time{
+                display: flex;
+                gap:20px;
+
+                .admin-time{
+                    font-size:20px;
+                    font-weight: 500;
+                    color: rgba(255, 255, 255, 0.8);
+                }
+
+                .active-box{
+                    background-color: $success-color;
+                    color: #fff;
+                    font-weight: 500;
+                    font-size: 14px;
+                    border-radius: 5px;
+                    padding:5px 10px;
+                }
+            }
+            
+            .main-question{
+                font-size: 36px;
+                font-weight: 700;
+                color: #fff;
+            }
+        }
+        
+    }
+
+    .filters-container{
+        display: flex;
+        flex-direction: column;
+        gap:24px;
+        
+        h1{
+            font-size: 36px;
+            font-weight: 700;
+            color:#fff;
+        }
+        // https://www.iconbunny.com/icons/media/catalog/product/cache/2/thumbnail/600x/1b89f2fc96fc819c2a7e15c7e545e8a9/3/6/3629.3-toy-train-icon-iconbunny.jpg
+        .filter-btn{
+            padding: 14px 20px;
+            color: #fff;
+            background-color: $inp-color ;
+            border: 1px solid #EEE;
+            border-radius: 5px;
+
+        }
+        
+        .active-filter-btn{
+            background-color: $success-color;
+            border: 1px solid $success-color;
+        }
+    }
+    
+}
+

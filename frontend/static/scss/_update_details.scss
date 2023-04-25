@@ -7,34 +7,87 @@ nav {
     a {
         display: flex;
         gap: 5px;
-        width:fit-content;
+        width: fit-content;
     }
 }
 
 
-main {
+#profile-update {
     margin-top: 50px;
     padding: 20px;
     color: $light-text-color;
 
-    .profile-container{
-        margin-top:40px;
-        display:flex;
+    .profile-img-container {
+        margin-top: 40px;
+        display: flex;
         flex-direction: column;
-        gap:10px;
-        img{
-            width:100px;
-            aspect-ratio:1;
-            border-radius:50%;
+        gap: 15px;
+        align-items: center;
+
+        img {
+            width: 100px;
+            aspect-ratio: 1;
+            border-radius: 50%;
         }
-        p{
-            font-size:16rem;
-            font-weight:600;
+
+        p {
+            font-size: 16px;
+            font-weight: 600;
         }
     }
+
+    .details-container {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        margin-top: 30px;
+        margin-bottom: 30px;
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+
+            .input-container {
+                background-color: $inp-color;
+                height: 48px;
+            
+                border-radius: 5px;
+                input {
+                    border: none;
+                    border-radius: 5px;
+                    height: 100%;
+                    background-color: #283756;
+                    width: 100%;
+                    padding: 10px 20px;
+                    color: white;
+                    &::placeholder {
+                        color: #fff;
+                    }
+                    &:focus{
+                        outline: none;
+                    }
+                }
+  
+            }
+            .message-container{
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+                // display: none !important;
+                p{
+                    
+                    font-size: 12px;
+                    color: #A8A7BE;
+                }
+            }
+        }
+    }
+
 }
 
 a {
     color: $light-text-color;
     text-decoration: none;
 }
+
