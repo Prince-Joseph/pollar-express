@@ -1,4 +1,52 @@
-<div>Vote Here
+{% extends 'base.html' %}
 
-    <a href="/">Submit</a>
+
+{% block content %}
+
+{% if messages %}
+<div class="message-container">
+
+    {% for message in messages %}
+    <div class="message">
+        {{message}}
+    </div>
+    {% endfor %}
 </div>
+{% endif %}
+<main id="submit-page">
+    <div class="header">
+        <p>Question #{{poll.id}}</p>
+        <p> <i class="fa-solid fa-clock"></i>&nbsp; {{poll.time_left}}</p>
+    </div>
+
+    <h1 class="question">{{poll.question}}</h1>
+    
+    <form action="" method="post">
+        {% csrf_token %}
+    <div class="buttons-container">
+       {% for choice in poll.pollchoice_set.all  %}
+       <!-- White -->
+       
+       <input id="choice{{choice.id}}" type="radio" name="choice_id" value="{{choice.id}}"> 
+       <label for="choice{{choice.id}}" class="btn-primary">{{choice.value}}</label>
+       {% endfor %}
+        
+       <!-- Orange 
+         <button class="btn-primary active-btn"></button> 
+         Default 
+         <button class="btn-primary disabled-btn">Both</button> -->
+
+    </div>
+    
+    <div class="buttons-container">
+        <button type="submit" class="btn-primary submit-btn">Submit</button>
+    </div>
+    </form>
+
+    
+<button data-link="{% url 'lobby' %}">home</button>
+
+
+</main>
+{% endblock content %}
+

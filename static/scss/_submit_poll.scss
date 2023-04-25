@@ -1,0 +1,33 @@
+#submit-page {
+    margin-top: 5%;
+    @extend %dark-background;
+
+    .header {
+        color: #fff;
+        display: flex;
+        justify-content: space-between;
+        font-size: 16px;
+        font-weight: 700;
+        padding: 20px 15px;
+
+        p {
+            font-weight: 700;
+        }
+    }
+
+    .question {
+        padding: 0 15px;
+        font-weight: 700;
+        font-size: 38px;
+        color: #FFF;
+    }
+
+    input[type='radio'] {
+        display: none;
+    }
+
+    input[type="radio"]:checked + label {
+        @extend .active-btn;
+      }
+
+}
