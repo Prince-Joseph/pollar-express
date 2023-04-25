@@ -22,4 +22,12 @@
         color: #FFF;
     }
 
+    input[type='radio'] {
+        display: none;
+    }
+
+    input[type="radio"]:checked + label {
+        @extend .active-btn;
+      }
+
 }

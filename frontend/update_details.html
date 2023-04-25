@@ -22,14 +22,16 @@
         <img src="https://i.pinimg.com/originals/f2/7e/a7/f27ea7279398c6c7455aa76875f12fb8.gif" />
     </div> -->
 
+    <main id="profile-update">
+
     <nav>
         <a href="#">
             <i class="fa-solid fa-house"></i>
             <span>Home</span>
         </a>
     </nav>
-
-    <main id="profile-update">
+    
+    <div class="card">
         <span><a href="#">Home</a> / Profile</span>
         <div class="profile-img-container">
             <img src="https://divedigital.id/wp-content/uploads/2022/07/2-Blank-PFP-Icon-Instagram.jpg" alt="">
@@ -41,7 +43,7 @@
                 <div class="input-container">
                     <input type="text" placeholder="Name">
                 </div>
-                <div class="message-container" id="msg1">
+                <div class="error-container" id="msg1">
                     <p>No special characters are allowed</p>
                 </div>
             </div>
@@ -50,7 +52,7 @@
                 <div class="input-container">
                     <input type="text"  placeholder="Roll Number">
                 </div>
-                <div class="message-container" id="msg2">
+                <div class="error-container" id="msg2">
                     <p>No special characters are allowed</p>
                     <p>Roll number format must be proper</p>
                 </div>
@@ -60,17 +62,21 @@
                 <div class="input-container" >
                     <input type="text" placeholder="Mobile Number">
                 </div>
-                <div class="message-container" id="msg3">
+                <div class="error-container" id="msg3">
                     <p>Length must be only 10 digits long</p>
                 </div>
             </div>
 
         </div>
 
-        <button class="btn-primary active-btn">Submit</button>
+        <div class="buttons-container">
+            <button class="btn-primary active-btn">Submit</button>
+        </div>
             
         
-    </main>
+    </div>
+</main>
+
 </body>
 
 </html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polling App</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./static/css/main.css">
+</head>
+
+<body>
+    <main id="lobby">
+        <div class="profile-content">
+            <img src="https://scontent.fhyd2-2.fna.fbcdn.net/v/t1.6435-9/183646085_10159128331379556_9178552879199923260_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=9267fe&_nc_ohc=YB30D-hPk68AX-zcbWh&_nc_ht=scontent.fhyd2-2.fna&oh=00_AfCOm0BA8wHUb2p9Ff0F_iG_GLASj8TC8SHXfifO40yODA&oe=646EF40A"
+                alt="">
+            <div class="name-container">
+                <span>Gwendolyn</span>
+                <span>jane***@gmail.com</span>
+            </div>
+            <div class="edit-icon">
+                <i class="fa-solid fa-user-pen"></i>
+            </div>
+        </div>
+
+        <!-- If admin -->
+        <div class="card click">
+            <h1>Questions <i class="fa-solid fa-angle-double-right"></i></h1>
+        </div>
+
+        <!-- No Content -->
+        <div class="meme-container card">
+            <h1>Wait!</h1>
+            <video width="100%" height="auto" autoplay muted loop>
+                <source src="./static/media/beanmeme.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="buttons-container">
+                <button class="btn-primary disabled-btn">Reload </button>
+            </div>
+        </div>
+
+        
+
+        <!-- if Questions-->
+        <section class="active-questions-section">
+            <div class="active-questions-header">
+                <h1>Active Questions</h1>
+                <i class="fa-solid fa-refresh"></i>
+            </div>
+
+            <div class="active-questions-container">
+                <!-- Iterable -->
+                <div class="question">
+                    <span>05:02 left</span>
+                    <h1>
+                        Do you like dogs or cats?
+                    </h1>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+</body>
+
+</html>

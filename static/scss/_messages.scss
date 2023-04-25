@@ -1,0 +1,15 @@
+.message-container {
+    // padding: 1rem 1px;
+    max-width: 300px;
+    margin-inline: auto;
+    
+    .message{
+        @extend %dark-background;
+        margin-top: 1rem;
+        min-height: 48px;
+        font-size: 1rem;
+        display: grid;
+        place-content: center;
+    }
+
+}

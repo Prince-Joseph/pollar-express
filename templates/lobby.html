@@ -1,9 +1,98 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% load static%}
+<main id="lobby">
+
+    <div data-link="{% url 'profile_update' %}" class="profile-content">
+        <img src="https://scontent.fhyd2-2.fna.fbcdn.net/v/t1.6435-9/183646085_10159128331379556_9178552879199923260_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=9267fe&_nc_ohc=YB30D-hPk68AX-zcbWh&_nc_ht=scontent.fhyd2-2.fna&oh=00_AfCOm0BA8wHUb2p9Ff0F_iG_GLASj8TC8SHXfifO40yODA&oe=646EF40A"
+            alt="">
+        <div class="name-container">
+            <span>{{request.user.first_name}}</span>
+            <span>{{request.user.email}}</span>
+        </div>
+        <div class="edit-icon">
+            <i class="fa-solid fa-user-pen"></i>
+        </div>
+    </div>
+
+        {% if messages %}
+        <div  class="message-container">
+        {% for message in messages %}
+        <div id="message-{{ forloop.counter }}"class="message">
+            <span>{{message}}</span>
+            <span data-close="message-{{ forloop.counter }}">X</span>
+        </div>
+        {% endfor %}
+    </div>
+        {% endif %}
+    <!-- If admin -->
+    {% if request.user.is_staff %}
+    <div data-link="{% url 'questions' %}" class="card click">
+        <h1>Questions <i class="fa-solid fa-angle-double-right"></i></h1>
+    </div>
+    {% endif %}
+    
+
+    <!-- No Content -->
+    
+    {% if active_questions  %}
+      
+    
+    <section class="active-questions-section">
+        <div class="active-questions-header">
+            <h1>Active Questions</h1>
+            <div data-link="/">
+
+                <i class="fa-solid fa-refresh"></i>
+            </div>
+        </div>
+
+        <div class="active-questions-container">
+          
+            <!-- Iterable -->
+            {% for  question in active_questions  %}
+            <div class="question" data-link="{% url 'submit_poll' question.id %}">
+                <span>{{question.time_left}} left</span>
+                <h1>
+                    {{question.question}}
+                </h1>
+            </div>
+            {% endfor %}
+
+        </div>
+    </section>
+    
+    {% else %}
+     <div class="meme-container card">
+        <h1>Wait!</h1>
+        <video width="100%" height="auto" autoplay muted loop>
+            <source src="{% static 'media/beanmeme.mp4' %}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="buttons-container">
+            <button data-link="/" class="btn-primary disabled-btn">Reload </button>
+        </div>
+    </div>
+
+    {% endif %}
+
+
+    
+    <!-- if Questions-->
+    
+
+    
+
+</main>
+{% endblock content %}
 
 <title>Train Page</title>
 <div>Lobby
     
     <a href="{% url 'profile_update' %}">Profile Update</a>
     <a href="{% url 'submit_poll' 1 %}">Active Question</a>
+    
     {% if request.user.is_staff %}
         <a href="{% url 'questions' %}"> Goto Questions</a>
     {% endif %}
