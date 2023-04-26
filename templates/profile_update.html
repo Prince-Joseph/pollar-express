@@ -1,14 +1,27 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content%}
 
 <main id="profile-update">
 
     <nav>
-        <a href="#">
+
+        <button data-link="{% url 'lobby'%}" class="home">
             <i class="fa-solid fa-house"></i>
-            <span data-link="{% url 'lobby'%}">Home</span>
-        </a>
+            <span >Home</span>
+        </button>
+
+        <form action="/accounts/logout/" method="POST">
+            {% csrf_token %}
+            <button type="submit">
+                <span>
+                    Logout
+                </span>
+                <i class="fa-solid fa-sign-out"></i> 
+            </button>
+        </form>
+
     </nav>
 
     {% if messages %}
@@ -28,36 +41,37 @@
     <form action="" method="post">
         {% csrf_token %}
         <div class="profile-img-container">
-            <img src="https://divedigital.id/wp-content/uploads/2022/07/2-Blank-PFP-Icon-Instagram.jpg" alt="">
+            <img src="https://scontent.fhyd2-2.fna.fbcdn.net/v/t1.6435-9/183646085_10159128331379556_9178552879199923260_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=9267fe&_nc_ohc=YB30D-hPk68AX-zcbWh&_nc_ht=scontent.fhyd2-2.fna&oh=00_AfCOm0BA8wHUb2p9Ff0F_iG_GLASj8TC8SHXfifO40yODA&oe=646EF40A" alt="">
             <p>{{request.user.email}}</p>
         </div>
         <div class="details-container">
 
-            <div class="container">
+            <div id="name-form-container" class="container">
                 <div class="input-container">
-                    <input type="text" placeholder="Name" name="first_name" value="{{request.user.first_name}}">
+                    <input autocomplete="off" type="text" placeholder="Name"  name="first_name" value="{{request.user.first_name}}">
                 </div>
-                <div class="error-container" id="msg1">
-                    <p>No special characters are allowed</p>
+                <div class="error-container">
+                    <p></p>
                 </div>
             </div>
 
-            <div class="container">
+            <div id="rollnumber-form-container" class="container">
                 <div class="input-container">
-                    <input type="text" name="roll_number" value="{{request.user.roll_number}}" placeholder="Roll Number">
+                    <input autocomplete="off" type="text" name="roll_number" value="{{request.user.roll_number}}" placeholder="Roll Number">
                 </div>
-                <div class="error-container" id="msg2">
-                    <p>No special characters are allowed</p>
-                    <p>Roll number format must be proper</p>
+                <div class="error-container">
+                    <p></p>
+                    <p></p>
+                    
                 </div>
             </div>
 
-            <div class="container">
+            <div id="mobilenumber-form-container" class="container">
                 <div class="input-container" >
-                    <input type="text" name="mobile_number" value="{{request.user.mobile_number}}" placeholder="Mobile Number">
+                    <input  autocomplete="off" type="text" name="mobile_number" value="{{request.user.mobile_number}}" placeholder="Mobile Number">
                 </div>
-                <div class="error-container" id="msg3">
-                    <p>Length must be only 10 digits long</p>
+                <div class="error-container">
+                    <p></p>
                 </div>
             </div>
 
@@ -72,11 +86,11 @@
     </div>
 </main>
 
-
-
-
+<script defer src="{% static 'scripts/profileUpdatevalidator.js' %}"></script>
 {% endblock content %}
-    <a href="{% url 'lobby'%}">back to lobby</a><div>
+
+
+<a href="{% url 'lobby'%}">back to lobby</a><div>
 
 
     <a href="{% url 'lobby'%}">Save changes</a>
