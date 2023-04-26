@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polling App</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./static/css/main.css">
+</head>
+
+<body>
+    <main id="create-question" class="desktop-view">
+        <div class="set-question">
+            <button class="choices-box">Back to Questions</button>
+            <h1>Set Question</h1>
+            <textarea class="choices-box" type="text"> </textarea>
+            <div class="text-characters">Maximum of 250 characters allowed</div>
+            <h1>Question Settings</h1>
+            <div class="duration-setter">
+                <p>Duration</p>
+                <div class="timer">
+                    <i class="fa-solid fa-hourglass"></i>
+                    <span>5:30</span>
+                </div>
+            </div>
+            <div class="votes-container">
+                <p>Votes</p>
+                <div>
+                    <input type="checkbox" id="Anonymous" name="Anonymous" value="Anonymous">
+                    <label for="Anonymous">Anonymous</label>
+                </div>
+            </div>
+            <button class="set-btn">Set</button>
+        </div>
+        <div class="choices-container">
+            <h1>Choices</h1>
+            <div class="choices">
+                <div class="choices-box">Choice #1</div>
+                <div class=choices-box>Choice #2</div>
+                <div class="choices-box">Choice #3</div>
+            </div>
+            <div class="add-choice">
+                <input class="choices-box" type="text" placeholder="Add Choice">
+                <div class="plus-btn"><i class="fa-solid fa-plus"></i></div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

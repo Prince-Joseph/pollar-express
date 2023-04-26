@@ -1,3 +1,4 @@
+ 
 <h1>Question Create</h1>
 <a href="{% url 'questions' %}">Back to Questions</a>
 <form action="" method="POST">
@@ -7,12 +8,23 @@
     <button type="submit">Create Question</button>
 </form>
 <!-- We need take in the valuein the views foollow me -->
+
+
+
+{% if poll%}
 <h1>
     Add Choice
 </h1>
 
+{% for choice in poll.pollchoice_set.all %}
+    {{ choice }} <br>
+{% endfor %}
+
 <form action="" method="POST">
     {% csrf_token %}
-    {{ choice_form.as_p }}
+    <input type="hidden" name="question" value="{{poll.id}}">
+    <input type="text" name="value">
     <button type="submit">Create Choice</button>
 </form>
+{% endif %}
+

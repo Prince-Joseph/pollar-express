@@ -8,7 +8,6 @@ class QuestionCreateForm(forms.ModelForm):
             'question',
             'duration',
             'is_anonymous',
-            'is_active',
             ]
         
 class ChoiceCreateForm(forms.ModelForm):

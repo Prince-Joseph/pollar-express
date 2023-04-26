@@ -1,16 +1,38 @@
+{% extends "base.html" %}
+
 {% load static %}
-<html>
+{% block content %}
+<main id="poll_result" class="desktop-view">
 
+    <section class="question-section">
+        <span id="time-status">04:02 left</span>
+        <div id="question">{{poll.question}}</div>
+        <div id="choices">
+            <div id="choice-template" class="choice">
+                <div></div>
+                <div></div>
+                <div class="bar-container">
+                    <div class="bar"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="extra-info-section">
+        <div class="buttons-container">
+            <button class="btn-primary disabled-btn" data-link="{% url 'question_manager' poll.id %}">Back to Question</button>
+            <button class="btn-primary submit-btn" data-link="{% url 'poll_result' poll.id %}">Reload</button>
+        </div>
+
+        <div id="voters-list" class="buttons-container voter">
+            <span class="disabled-btn user-tag"></span>
+        </div>
+    </section>
+    
+    
+    
+    
     <input id="pollId" type="hidden" value="{{poll.id}}"/>
-
-    <link rel="stylesheet" href="{% static 'css/main.css' %}">
-
-    <a href="{% url 'questions' %}">Back to Questions</a>
-
-    <a href="{% url 'question_manager' poll.id %}">Back to Manager</a>
-
-    <div id="question">Question</div>
-    <div id="choices"></div>
-
     <script defer src="{% static 'scripts/question.js'%}"></script>
-</html>
+</main>
+{% endblock %}
