@@ -34,6 +34,8 @@ def question_api(request, poll_id):
         "expireAt": timezone.localtime(poll.expire_at)
         if poll.expire_at
         else "not active",
+        "voters": poll.voters,
+        "latest_voters": poll.latest_voters,
         "count": poll.count,
         "timeLeft": poll.time_left,
     }

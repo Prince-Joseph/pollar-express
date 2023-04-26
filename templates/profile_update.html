@@ -1,9 +1,97 @@
-<a href="{% url 'lobby'%}">back to lobby</a>
+{% extends "base.html" %}
+{% load static %}
 
-<div>
-    <h1>
-        Profile Update
-    </h1>
+{% block content%}
+
+<main id="profile-update">
+
+    <nav>
+
+        <button data-link="{% url 'lobby'%}" class="home">
+            <i class="fa-solid fa-house"></i>
+            <span >Home</span>
+        </button>
+
+        <form action="/accounts/logout/" method="POST">
+            {% csrf_token %}
+            <button type="submit">
+                <span>
+                    Logout
+                </span>
+                <i class="fa-solid fa-sign-out"></i> 
+            </button>
+        </form>
+
+    </nav>
+
+    {% if messages %}
+        <div class="message-container">
+
+            {% for message in messages %}
+            <div class="message">
+                {{message}}
+            </div>
+            {% endfor %}
+            
+        </div>
+    {% endif %}
+
+    <div class="card">
+        <span><a href="{% url 'lobby' %}">Home</a> / Profile</span>
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="profile-img-container">
+            <img src="https://scontent.fhyd2-2.fna.fbcdn.net/v/t1.6435-9/183646085_10159128331379556_9178552879199923260_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=9267fe&_nc_ohc=YB30D-hPk68AX-zcbWh&_nc_ht=scontent.fhyd2-2.fna&oh=00_AfCOm0BA8wHUb2p9Ff0F_iG_GLASj8TC8SHXfifO40yODA&oe=646EF40A" alt="">
+            <p>{{request.user.email}}</p>
+        </div>
+        <div class="details-container">
+
+            <div id="name-form-container" class="container">
+                <div class="input-container">
+                    <input autocomplete="off" type="text" placeholder="Name"  name="first_name" value="{{request.user.first_name}}">
+                </div>
+                <div class="error-container">
+                    <p></p>
+                </div>
+            </div>
+
+            <div id="rollnumber-form-container" class="container">
+                <div class="input-container">
+                    <input autocomplete="off" type="text" name="roll_number" value="{{request.user.roll_number}}" placeholder="Roll Number">
+                </div>
+                <div class="error-container">
+                    <p></p>
+                    <p></p>
+                    
+                </div>
+            </div>
+
+            <div id="mobilenumber-form-container" class="container">
+                <div class="input-container" >
+                    <input  autocomplete="off" type="text" name="mobile_number" value="{{request.user.mobile_number}}" placeholder="Mobile Number">
+                </div>
+                <div class="error-container">
+                    <p></p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="buttons-container">
+            <button type="submit" class="btn-primary active-btn">Submit</button>
+        </div>
+    </form>
+
+
+    </div>
+</main>
+
+<script defer src="{% static 'scripts/profileUpdatevalidator.js' %}"></script>
+{% endblock content %}
+
+
+<a href="{% url 'lobby'%}">back to lobby</a><div>
+
 
     <a href="{% url 'lobby'%}">Save changes</a>
 

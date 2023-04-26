@@ -13,14 +13,14 @@ class Poll(models.Model):
 
     def __str__(self):
         return self.question
-    
+
     def check_expire(self):
         if self.expire_at:
             if timezone.now() > self.expire_at:
                 self.is_active = False
                 self.expire_at = None
                 self.save()
-                
+
     @property
     def count(self):
         poll_choices = self.pollchoice_set.all()
@@ -31,14 +31,29 @@ class Poll(models.Model):
 
     @property
     def time_left(self):
-        from datetime import datetime
-        current_time = timezone.now() 
-        if self.expire_at: 
-            timer =  self.expire_at - current_time  
+        current_time = timezone.now()
+        if self.expire_at:
+            timer =  self.expire_at - current_time
             minutes, seconds = divmod(timer.total_seconds(), 60)
             return  f"{'{:02d}'.format(int(minutes))}:{'{:02d}'.format(int(seconds))}"
         else:
             return 0
+        
+    @property
+    def voters(self):
+        choices = PollChoice.objects.filter(question__id = self.id)
+        choices_list = choices.values_list("id")
+        users_list = Vote.objects.filter(poll_choice__in = choices_list).values_list("user")
+        users = list(CustomUser.objects.filter(id__in=users_list).values_list("first_name"))
+        return users
+    
+    @property
+    def latest_voters(self):
+        choices = PollChoice.objects.filter(question__id = self.id)
+        choices_list = choices.values_list("id")
+        users_list = Vote.objects.filter(poll_choice__in = choices_list, voted_at__gt = timezone.now()-timezone.timedelta(seconds = 2)).values_list("user")
+        users = list(CustomUser.objects.filter(id__in=users_list).values_list("first_name"))
+        return users
 
 class PollChoice(models.Model):
     question = models.ForeignKey(Poll, on_delete=models.CASCADE)
@@ -48,7 +63,7 @@ class PollChoice(models.Model):
     def count(self):
         len_ = self.vote_set.all().count()
         return len_
-    
+
     def __str__(self) -> str:
         return f"{self.value} ({self.question})"
 
@@ -62,9 +77,9 @@ class Vote(models.Model):
         question = Poll.objects.get(id=poll_id)
         choices = PollChoice.objects.filter(question__id = poll_id)
         choices_list = choices.values_list("id")
-        
+
         votes = Vote.objects.filter(poll_choice__in = choices_list)
-        
+
         for vote in votes:
             if user == vote.user:
                 return True
