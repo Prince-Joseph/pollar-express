@@ -1,9 +1,83 @@
-<a href="{% url 'lobby'%}">back to lobby</a>
+{% extends "base.html" %}
 
-<div>
-    <h1>
-        Profile Update
-    </h1>
+{% block content%}
+
+<main id="profile-update">
+
+    <nav>
+        <a href="#">
+            <i class="fa-solid fa-house"></i>
+            <span data-link="{% url 'lobby'%}">Home</span>
+        </a>
+    </nav>
+
+    {% if messages %}
+        <div class="message-container">
+
+            {% for message in messages %}
+            <div class="message">
+                {{message}}
+            </div>
+            {% endfor %}
+            
+        </div>
+    {% endif %}
+
+    <div class="card">
+        <span><a href="{% url 'lobby' %}">Home</a> / Profile</span>
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="profile-img-container">
+            <img src="https://divedigital.id/wp-content/uploads/2022/07/2-Blank-PFP-Icon-Instagram.jpg" alt="">
+            <p>{{request.user.email}}</p>
+        </div>
+        <div class="details-container">
+
+            <div class="container">
+                <div class="input-container">
+                    <input type="text" placeholder="Name" name="first_name" value="{{request.user.first_name}}">
+                </div>
+                <div class="error-container" id="msg1">
+                    <p>No special characters are allowed</p>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="input-container">
+                    <input type="text" name="roll_number" value="{{request.user.roll_number}}" placeholder="Roll Number">
+                </div>
+                <div class="error-container" id="msg2">
+                    <p>No special characters are allowed</p>
+                    <p>Roll number format must be proper</p>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="input-container" >
+                    <input type="text" name="mobile_number" value="{{request.user.mobile_number}}" placeholder="Mobile Number">
+                </div>
+                <div class="error-container" id="msg3">
+                    <p>Length must be only 10 digits long</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="buttons-container">
+            <button type="submit" class="btn-primary active-btn">Submit</button>
+        </div>
+    </form>
+
+
+    </div>
+</main>
+
+
+
+
+{% endblock content %}
+    <a href="{% url 'lobby'%}">back to lobby</a><div>
+
 
     <a href="{% url 'lobby'%}">Save changes</a>
 

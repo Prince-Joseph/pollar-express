@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect
+from users.models import CustomUser
 from .models import Poll, PollChoice, Vote
 from .forms import QuestionCreateForm, ChoiceCreateForm
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib import messages
-
+from .form_validations import profile_form__validate_and_save
 """
 User VIEWS
 """
@@ -94,7 +95,11 @@ def profile_update(request):
     """
     Updates Profile
     """
-    return render(request,"profile_update.html")
+
+    if request.method == "POST":
+        profile_form__validate_and_save(request)
+
+    return render(request,"profile_update.html" )
 
 
 """
