@@ -5,11 +5,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+    <title>Question Manager</title>
 </head>
 <body>
     <main>
         <a href="{% url 'questions' %}">Back to Questions</a>
+        <a href="{% url 'create_question' %}?pollid={{poll.id}} "> Update Question</a>
         <input id="pollId" type="hidden" value="{{poll.id}}">
         <div class="header">
             <div>Question #{{poll.id}}</div>
@@ -35,8 +36,7 @@
             <button id="start">start</button>
 
             <button id="stop">stop</button>
-            <button id="snooze">snooze</button>
-            <div id="timer"></div>
+            <button id="snooze">snooze</button>     <div id="timer"></div>
 
         </div>
     </main>

@@ -1,5 +1,57 @@
-<html>
-    <div id="question">Question</div>
+{% extends "base.html" %}
+
+{% block content %}
+<main id="admin_questions" class="desktop-view">
+        
+    <div class="questions-container">
+        <div class="header" >
+            <h1>Questions</h1>
+            <button data-link="{% url 'create_question' %}"class="create-btn">Create</button>
+        </div>
+        
+        {% for poll in questions %}
+        
+        <div class="question-container" data-link="{% url 'question_manager' poll.id %}">
+            <div class="info-header">
+                <div class="time">
+                    {% if poll.is_active %}
+                        
+                      {{poll.time_left}} 
+                        {% else  %}
+                      {{poll.duration}}
+                    {% endif %}
+
+                </div>
+                {% if poll.is_active %}
+                <div class="active-box">Active</div>
+                {% endif %}
+            </div>
+            <div class="main-question">{{poll.question}}</div>
+        </div>
+        {% endfor %}
+
+
+    </div>
+
+    <div class="filters-container">
+        <h1>Sort</h1>
+        <div class="filter-btn active-filter-btn">Newest First</div>
+        <div class="filter-btn">Oldest First</div>
+        <h1>Show only</h1>
+        <div class="filter-btn">Completed</div>
+        <div class="filter-btn">New</div>
+        <div class="filter-btn">Active</div>
+    </div>
+</main>
+{% endblock content %}
+
+    
+    
+    
+    
+    
+    
+    <!-- <div id="question">Question</div>
     <a href="{% url 'create_question' %}">Create Question</a>
     {% for poll in questions %}
     <hr>
@@ -8,7 +60,6 @@
     {{ poll.created_at|timesince}}
     {{poll.duration}}
     <hr>
-    {% endfor %}
+    {% endfor %} -->
 
     
-</html>

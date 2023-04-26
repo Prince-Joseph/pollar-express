@@ -24,10 +24,6 @@ def lobby(request):
 def login(request):
     return render(request , "login.html")
 
-
-
-
-
 @login_required
 def submit_poll(request, poll_id):
     """
@@ -57,6 +53,7 @@ def submit_poll(request, poll_id):
                 stay
 
     """
+
     context={}
     poll = Poll.objects.get(id=poll_id)
     context['poll'] = poll
@@ -125,25 +122,58 @@ def create_question(request):
     we get pollId from url of question manager (?pollId=<int:poll_id>)
     """
 
-    poll_id = request.GET.get("pollId")
-
-    question_form = QuestionCreateForm()
+    poll_id = request.GET.get("pollid")
+    print(poll_id)
+    context = {}
+    
+    if poll_id is not None:
+    
+        poll= Poll.objects.get(id=poll_id)
+        question_form = QuestionCreateForm(instance=poll)
+        context['poll'] = poll
+        
+    else:
+        question_form = QuestionCreateForm()
+    
+    
     choice_form = ChoiceCreateForm()
 
-    context = {}
     context['question_form'] = question_form
     context['choice_form'] = choice_form
 
     if request.method == "POST":
         if request.POST.get("form_type") =="question":
             form = QuestionCreateForm(request.POST)
+            if form.is_valid():
+                poll = form.save()
+                response = redirect('create_question')
+                response['Location'] += f'?pollid={poll.id}'
+                return response
         else:
             form = ChoiceCreateForm(request.POST)
+            if form.is_valid():
+                choice = form.save()
+                response = redirect('create_question')
+                response['Location'] += f'?pollid={choice.question.id}'
+                return response
 
-        if form.is_valid():
-            form.save()
+       
+            
 
     return render(request,"create_question.html", context)
+
+# @login_required
+# @staff_member_required
+# def update_question(request,poll_id):
+
+#     poll_id = request.GET.get(poll_id)
+#     Pollpoll = .objects.get(id=poll_id)
+
+#     context={}
+#     context["poll"]=poll
+    
+#     return render(request,"create_question.html", context)
+
 
 
 @login_required

@@ -37,7 +37,7 @@ class Poll(models.Model):
             minutes, seconds = divmod(timer.total_seconds(), 60)
             return  f"{'{:02d}'.format(int(minutes))}:{'{:02d}'.format(int(seconds))}"
         else:
-            return 0
+            return "00:00"
         
     @property
     def voters(self):

@@ -95,3 +95,7 @@ main{
 .click{
     cursor: pointer !important;
 }
+
+input:focus{
+    outline: none;
+}
