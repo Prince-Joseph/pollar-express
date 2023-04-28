@@ -1,25 +1,37 @@
-#submit-page {
-    margin-top: 5%;
-    @extend %dark-background;
+nav {
+    max-width: 320px;
+    margin-inline: auto;
+    // margin-top: 5%;
+    color: $light-text-color;
 
-    .header {
-        color: #fff;
+    a {
         display: flex;
-        justify-content: space-between;
-        font-size: 16px;
-        font-weight: 700;
-        padding: 20px 15px;
-
-        p {
-            font-weight: 700;
-        }
+        gap: 5px;
+        width: fit-content;
     }
+}
 
-    .question {
-        padding: 0 15px;
+#submit-page {
+    margin-top: 1%;
+    @extend %dark-background;
+}
+
+.header {
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 20px 15px;
+
+    p {
         font-weight: 700;
-        font-size: 38px;
-        color: #FFF;
     }
+}
 
+.question {
+    padding: 0 15px;
+    font-weight: 700;
+    font-size: 38px;
+    color: #FFF;
 }

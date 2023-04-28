@@ -9,18 +9,27 @@
     <div class="message">
         {{message}}
     </div>
-    {% endfor %}
+    {% endfor %}s
 </div>
 {% endif %}
 
+<nav>
+    <button data-link="{% url 'lobby'%}" class="home">
+        <i class="fa-solid fa-house"></i>
+        <span >Home</span>
+    </button>
+</nav>
+
+
 <main id="submit-page">
+
     <div class="header">
         <p>Question #{{poll.id}}</p>
-        <p> <i class="fa-solid fa-clock"></i>&nbsp; {{poll.time_left}}</p>
+        <p> <i class="fa-solid fa-clock"></i>&nbsp; <span id="timer">{{poll.time_left}} </span> </p>
     </div>
 
     <h1 class="question">{{poll.question}}</h1>
-    
+    <input id="poll-id" type="hidden" value="{{poll.id}}">
     <form action="" method="post">
         {% csrf_token %}
     <div class="buttons-container">
@@ -45,7 +54,16 @@
 
     
 <button data-link="{% url 'lobby' %}">home</button>
+    <script>
+        const timerEl = document.getElementById('timer');
+        const pollId = document.getElementById('poll-id').value;
 
+        setInterval(()=>{
+            fetch(`/question/${pollId}/`)
+            .then(res=>res.json())
+            .then(data =>  timerEl.innerHTML = data['timeLeft']);
+        }, 500)
+    </script>
 
 </main>
 {% endblock content %}

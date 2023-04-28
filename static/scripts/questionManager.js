@@ -19,11 +19,12 @@ snoozeButton.addEventListener("click", function () {
 function updateQuestionManagerUI(questionData) {
     if (questionData.isActive) {
         timerElement.innerHTML = "".concat(questionData.timeLeft);
-        questionActiveElement.innerHTML = "True";
+        questionActiveElement.innerHTML = "Active";
+        questionActiveElement.style.display = 'grid';
     }
     else {
         timerElement.innerHTML = "00:00";
-        questionActiveElement.innerHTML = "False";
+        questionActiveElement.style.display = 'none';
     }
 }
 function fetchQuestionData() {

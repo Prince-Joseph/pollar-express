@@ -46,6 +46,7 @@ function TimeStatusElement(data: questionData){
 
     }
 }
+
 function ChoicesElement(data: questionData){
     const choices = data["choices"] as Array<choiceData>;
     const choicesContainer = choicesElement.cloneNode(true) as HTMLDivElement;

@@ -5,6 +5,7 @@ from .apis import (
     start_question,
     stop_question,
     extend_duration_question,
+    delete_choice,
     vote,
 )
 
@@ -28,6 +29,7 @@ api_url_patterns = [
     path("question/start/<int:poll_id>/", start_question, name="start_question"),
     path("question/stop/<int:poll_id>/", stop_question, name="stop_question"),
     path("question/snooze/<int:poll_id>/", extend_duration_question, name="extend_duration"),
+    path("choice/delete/<int:poll_choice_id>/", delete_choice, name="delete_choice"),
     
     path("vote/<int:poll_choice_id>/", vote, name="vote"),
 ]

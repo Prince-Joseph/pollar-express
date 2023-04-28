@@ -1,5 +1,68 @@
-<!DOCTYPE html>
+{% extends "base.html" %}
 {% load static %}
+
+{% block content %}
+
+
+<main id="admin-manage-ques-container">
+    <div class="manage-ques-container">
+        <div class="questions-manage-container">
+            <input id="pollId" type="hidden" value="{{poll.id}}">
+
+            <div data-link="{% url 'questions' %}" class="return-ques"> Back to Questions</div>
+            <div class="info-header">
+                
+                <div id="question-active" class="active-box">
+                    Active
+                </div>
+                <div class="time">{{poll.duration}}</div>
+            <div data-link="{% url 'create_question' %}?pollid={{poll.id}} "> Update Question</div>
+
+            </div>
+            
+            <div class="ques-container">
+                <h1>{{poll.question}}</h1>
+                <p class="time">Created {{poll.created_at|timesince}}</p>
+             
+
+                <div class="opts">
+                    {% for choice in  poll.pollchoice_set.all %}
+                    <div class="btn-primary">{{choice.value}} </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="time-control-container">
+            <div data-link="{% url 'poll_result' poll.id  %}" class="btn-primary result-btn">Show Results</div>
+            <div class="time-left"><span id="timer"></span> left</div>
+            <div id="start" class="btn-primary start-btn">Start</div>
+            <button id="stop" class="btn-primary base-btn">Stop</button>
+            <div id="snooze" class="btn-primary base-btn">+10 seconds</div>
+
+        </div>
+    </div>
+    
+    
+</main>
+
+
+<script defer src="{% static 'scripts/questionManager.js' %}"></script>
+{% endblock content %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -41,5 +104,4 @@
         </div>
     </main>
 </body>
-<script defer src="{% static 'scripts/questionManager.js' %}"></script>
-</html>
+</html> -->

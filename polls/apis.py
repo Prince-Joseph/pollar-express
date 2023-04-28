@@ -1,4 +1,4 @@
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseRedirect
 
 from .models import Poll, PollChoice, Vote
 from django.utils import timezone
@@ -128,6 +128,19 @@ def extend_duration_question(request, poll_id):
         "isActive": poll.is_active,
     }
     return JsonResponse(data= data)
+
+@login_required
+@staff_member_required
+def delete_choice(request, poll_choice_id):
+    """
+    API to  increase the timer duration
+    "question/snooze/<int:poll_id>/"
+
+    """
+    poll_choice = PollChoice.objects.get(id = poll_choice_id)
+    poll_choice.delete()
+    return HttpResponseRedirect(request.META.get("HTTP_REFERER"))
+
 
 
 """

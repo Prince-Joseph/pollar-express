@@ -109,7 +109,10 @@ def questions(request):
     Display Results
     """
     context = {}
+    
     context['questions'] = Poll.objects.all()
+    for question in context['questions']:
+        question.check_expire()
     return render(request, "questions.html", context=context)
 
 
@@ -143,9 +146,19 @@ def create_question(request):
 
     if request.method == "POST":
         if request.POST.get("form_type") =="question":
-            form = QuestionCreateForm(request.POST)
-            if form.is_valid():
-                poll = form.save()
+            if poll_id is None:
+                form = QuestionCreateForm(request.POST)
+                if form.is_valid():
+                        poll = form.save()
+                response = redirect('create_question')
+                response['Location'] += f'?pollid={poll.id}'
+                return response
+            
+            else:
+                form = QuestionCreateForm(request.POST, instance=poll)
+                if form.is_valid():
+                        poll = form.save()   
+                    
                 response = redirect('create_question')
                 response['Location'] += f'?pollid={poll.id}'
                 return response
