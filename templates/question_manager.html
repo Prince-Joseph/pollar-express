@@ -16,14 +16,20 @@
                     Active
                 </div>
                 <div class="time">{{poll.duration}}</div>
-            <div data-link="{% url 'create_question' %}?pollid={{poll.id}} "> Update Question</div>
-
+                {% if not poll.has_votes %}
+                <div class="active-box">
+                    New
+                </div>
+                {%endif%}
+                <div data-link="{% url 'create_question' %}?pollid={{poll.id}} "> Update Question</div>
             </div>
             
             <div class="ques-container">
+                
+
                 <h1>{{poll.question}}</h1>
                 <p class="time">Created {{poll.created_at|timesince}}</p>
-             
+                
 
                 <div class="opts">
                     {% for choice in  poll.pollchoice_set.all %}

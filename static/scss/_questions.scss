@@ -11,6 +11,25 @@
         gap:15px;
         padding-bottom: 2rem;
 
+        button {
+            display: flex;
+            gap: 5px;
+            width: fit-content;
+            cursor: pointer;
+            align-items: center;
+            border: none;
+            outline: none;
+            background-color: unset;
+            color: $light-text-color;
+            font-size: 1rem;
+            cursor: pointer;
+
+        }
+
+        .home{
+            align-items: baseline;
+        }
+
         .header{
             display: flex;
             justify-content: space-between;
@@ -63,6 +82,17 @@
                 }
 
                 .active-box{
+                    background-color: $primary-color;
+                    color: #fff;
+                    font-weight: 500;
+                    font-size: 14px;
+                    border-radius: 5px;
+                    padding:0 10px;
+                    display: grid;
+                    place-content: center;
+                }
+                
+                .new-box{
                     background-color: $success-color;
                     color: #fff;
                     font-weight: 500;

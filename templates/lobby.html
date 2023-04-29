@@ -19,9 +19,8 @@
         {% if messages %}
         <div  class="message-container">
         {% for message in messages %}
-        <div id="message-{{ forloop.counter }}"class="message">
+        <div  data-close="message-{{ forloop.counter }}" id="message-{{ forloop.counter }}"class="message">
             <span>{{message}}</span>
-            <span data-close="message-{{ forloop.counter }}">X</span>
         </div>
         {% endfor %}
     </div>

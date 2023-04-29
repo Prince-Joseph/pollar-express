@@ -1,12 +1,18 @@
 from django.shortcuts import render, redirect
-from users.models import CustomUser
-from .models import Poll, PollChoice, Vote
-from .forms import QuestionCreateForm, ChoiceCreateForm
+
 from django.utils import timezone
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
-from django.contrib import messages
+
+from .models import Poll, PollChoice, Vote
+
+from .forms import QuestionCreateForm, ChoiceCreateForm
 from .form_validations import profile_form__validate_and_save
+
+from .queryset_modifiers import sort_qs, filter_qs
+
+
 """
 User VIEWS
 """
@@ -17,7 +23,9 @@ def lobby(request):
     Shows active questions
     """
     context={}
-    context['active_questions'] = Poll.objects.filter(is_active = True, expire_at__gt= timezone.now())
+    active_questions = Poll.objects.filter(is_active = True, expire_at__gt= timezone.now())
+    context['active_questions'] = active_questions
+
     return render(request , "lobby.html", context=context)
 
 
@@ -109,10 +117,13 @@ def questions(request):
     Display Results
     """
     context = {}
-    
-    context['questions'] = Poll.objects.all()
-    for question in context['questions']:
+
+    questions = Poll.objects.all()
+    for question in questions:
         question.check_expire()
+    questions = sort_qs(questions, request.GET, { 'date_property': 'created_at' })
+    questions = filter_qs(questions, request.GET)
+    context['questions'] = questions
     return render(request, "questions.html", context=context)
 
 
@@ -128,17 +139,17 @@ def create_question(request):
     poll_id = request.GET.get("pollid")
     print(poll_id)
     context = {}
-    
+
     if poll_id is not None:
-    
+
         poll= Poll.objects.get(id=poll_id)
         question_form = QuestionCreateForm(instance=poll)
         context['poll'] = poll
-        
+
     else:
         question_form = QuestionCreateForm()
-    
-    
+
+
     choice_form = ChoiceCreateForm()
 
     context['question_form'] = question_form
@@ -153,12 +164,12 @@ def create_question(request):
                 response = redirect('create_question')
                 response['Location'] += f'?pollid={poll.id}'
                 return response
-            
+
             else:
                 form = QuestionCreateForm(request.POST, instance=poll)
                 if form.is_valid():
-                        poll = form.save()   
-                    
+                        poll = form.save()
+
                 response = redirect('create_question')
                 response['Location'] += f'?pollid={poll.id}'
                 return response
@@ -170,8 +181,8 @@ def create_question(request):
                 response['Location'] += f'?pollid={choice.question.id}'
                 return response
 
-       
-            
+
+
 
     return render(request,"create_question.html", context)
 
@@ -184,7 +195,7 @@ def create_question(request):
 
 #     context={}
 #     context["poll"]=poll
-    
+
 #     return render(request,"create_question.html", context)
 
 
