@@ -16,14 +16,6 @@
             width: fit-content;
             cursor: pointer;
             align-items: center;
-        }
-
-        .home{
-            align-items: baseline;
-        }
-
-        button{
-
             border: none;
             outline: none;
             background-color: unset;
@@ -32,6 +24,11 @@
             cursor: pointer;
 
         }
+
+        .home{
+            align-items: baseline;
+        }
+
     }
 
     .card {

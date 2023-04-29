@@ -3,49 +3,68 @@
 
 {% block content %}
 
+
 {% if messages %}
-<div class="message-container">
-    {% for message in messages %}
-    <div class="message">
-        {{message}}
-    </div>
-    {% endfor %}
+<div  class="message-container">
+{% for message in messages %}
+<div  data-close="message-{{ forloop.counter }}" id="message-{{ forloop.counter }}"class="message">
+<span>{{message}}</span>
+</div>
+{% endfor %}
 </div>
 {% endif %}
 
+<nav>
+    <button data-link="{% url 'lobby'%}" class="home">
+        <i class="fa-solid fa-house"></i>
+        <span >Home</span>
+    </button>
+</nav>
+
+
 <main id="submit-page">
+
     <div class="header">
         <p>Question #{{poll.id}}</p>
-        <p> <i class="fa-solid fa-clock"></i>&nbsp; {{poll.time_left}}</p>
+        <p> <i class="fa-solid fa-clock"></i>&nbsp; <span id="timer">{{poll.time_left}} </span> </p>
     </div>
 
     <h1 class="question">{{poll.question}}</h1>
-    
+    <input id="poll-id" type="hidden" value="{{poll.id}}">
     <form action="" method="post">
         {% csrf_token %}
     <div class="buttons-container">
        {% for choice in poll.pollchoice_set.all  %}
        <!-- White -->
-       
-       <input id="choice{{choice.id}}" type="radio" name="choice_id" value="{{choice.id}}"> 
+
+       <input id="choice{{choice.id}}" type="radio" name="choice_id" value="{{choice.id}}">
        <label for="choice{{choice.id}}" class="btn-primary">{{choice.value}}</label>
        {% endfor %}
-        
-       <!-- Orange 
-         <button class="btn-primary active-btn"></button> 
-         Default 
+
+       <!-- Orange
+         <button class="btn-primary active-btn"></button>
+         Default
          <button class="btn-primary disabled-btn">Both</button> -->
 
     </div>
-    
+
     <div class="buttons-container">
         <button type="submit" class="btn-primary submit-btn">Submit</button>
     </div>
     </form>
 
-    
-<button data-link="{% url 'lobby' %}">home</button>
 
+
+    <script>
+        const timerEl = document.getElementById('timer');
+        const pollId = document.getElementById('poll-id').value;
+
+        setInterval(()=>{
+            fetch(`/question/${pollId}/`)
+            .then(res=>res.json())
+            .then(data =>  timerEl.innerHTML = data['timeLeft']);
+        }, 500)
+    </script>
 
 </main>
 {% endblock content %}

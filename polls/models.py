@@ -18,8 +18,10 @@ class Poll(models.Model):
         if self.expire_at:
             if timezone.now() > self.expire_at:
                 self.is_active = False
-                self.expire_at = None
+                # self.expire_at = None
                 self.save()
+
+
 
     @property
     def count(self):
@@ -38,7 +40,7 @@ class Poll(models.Model):
             return  f"{'{:02d}'.format(int(minutes))}:{'{:02d}'.format(int(seconds))}"
         else:
             return "00:00"
-        
+
     @property
     def voters(self):
         choices = PollChoice.objects.filter(question__id = self.id)
@@ -46,7 +48,7 @@ class Poll(models.Model):
         users_list = Vote.objects.filter(poll_choice__in = choices_list).values_list("user")
         users = list(CustomUser.objects.filter(id__in=users_list).values_list("first_name"))
         return users
-    
+
     @property
     def latest_voters(self):
         choices = PollChoice.objects.filter(question__id = self.id)
@@ -54,6 +56,45 @@ class Poll(models.Model):
         users_list = Vote.objects.filter(poll_choice__in = choices_list, voted_at__gt = timezone.now()-timezone.timedelta(seconds = 2)).values_list("user")
         users = list(CustomUser.objects.filter(id__in=users_list).values_list("first_name"))
         return users
+
+
+    def get_new_polls():
+       all_polls = Poll.objects.all()
+       new_polls = Poll.objects.none()
+       
+       for poll in all_polls:
+        #    print(f"{poll}\n poll.has_votes: {poll.has_votes} \n new_polls: {new_polls}\n")
+           poll__as_qs = Poll.objects.filter(id = poll.id)
+           if not poll.has_votes:
+               new_polls = new_polls | poll__as_qs
+
+       return new_polls
+    
+    def get_completed_polls():
+       all_polls = Poll.objects.all()
+       new_polls = Poll.objects.none()
+       
+       for poll in all_polls:
+        #    print(f"{poll}\n poll.has_votes: {poll.has_votes} \n new_polls: {new_polls}\n")
+           poll__as_qs = Poll.objects.filter(id = poll.id)
+           if poll.has_votes:
+               new_polls = new_polls | poll__as_qs
+
+       return new_polls
+    
+   
+    
+
+    @property
+    def has_votes(self):
+        has_votes = False
+        pollchoices = self.pollchoice_set.all() 
+        for poll_choice in pollchoices:
+            # print(f"{poll_choice}\n poll_choice.has_votes: {poll_choice.has_votes} \n poll.has_votes: {has_votes}\n")
+            if poll_choice.has_votes == True:
+                has_votes = True
+                break
+        return has_votes
 
 class PollChoice(models.Model):
     question = models.ForeignKey(Poll, on_delete=models.CASCADE)
@@ -66,6 +107,20 @@ class PollChoice(models.Model):
 
     def __str__(self) -> str:
         return f"{self.value} ({self.question})"
+
+    @property
+    def has_votes(self):
+        """ 
+        has_votes:True -->  (someone answered)
+        has_votes:False --> (no one answered)
+        """
+        has_votes = False
+        votes = self.vote_set.all()
+        if len(votes) > 0:
+            has_votes = True
+        # print(f"{self.value}:{has_votes}")
+        
+        return has_votes
 
 
 class Vote(models.Model):

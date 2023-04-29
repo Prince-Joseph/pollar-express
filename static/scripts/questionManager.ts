@@ -42,12 +42,13 @@ function updateQuestionManagerUI(questionData:questionData){
 
     if (questionData.isActive) {
         timerElement.innerHTML = `${questionData.timeLeft}`;
-        questionActiveElement.innerHTML = `True`;
+        questionActiveElement.innerHTML = `Active`;
+        questionActiveElement.style.display = 'grid';
         
     }
     else{
         timerElement.innerHTML = `00:00`;
-        questionActiveElement.innerHTML = `False`;
+        questionActiveElement.style.display = 'none';
     }
 }
 

@@ -1,30 +1,62 @@
- 
-<h1>Question Create</h1>
-<a href="{% url 'questions' %}">Back to Questions</a>
-<form action="" method="POST">
-    <input type="hidden" name="form_type" value="question">
-    {% csrf_token %}
-    {{ question_form.as_p }}
-    <button type="submit">Create Question</button>
-</form>
-<!-- We need take in the valuein the views foollow me -->
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<main id="create-question" class="desktop-view">
+    <div class="set-question">
+        <button data-link="{% url 'questions' %}" class="choices-box">Back to Questions</button>
+        
+        <form action="" method="POST">
+        {% csrf_token %}
+
+            <h1>Set Question</h1>
+            <input type="hidden" name="form_type" value="question">
+            <textarea autocomplete="off" name="question" class="choices-box" type="text">{{poll.question}}</textarea>
+            <div id="question-errors" class="text-characters">&nbsp;</div>
+            
+            <h1>Question Settings</h1>
+            <div class="duration-setter">
+                <p>Duration</p>
+                <div  class="timer">
+                    <i class="fa-solid fa-hourglass"></i>
+                    <input autocomplete="off" name="duration" type="text" class="choices-box" value="{{poll.duration}}" placeholder="HH:MM:DD">
+                </div>
+               <div id="duration-error-message" class="error-message">&nbsp;</div> 
+            </div>
+            <div class="votes-container">
+                <p>Votes</p>
+                <div>
+                    <input autocomplete="off" name="is_anonymous" type="checkbox" id="Anonymous" value="{{poll.is_anonymous}}"/>
+                    <label for="Anonymous">Anonymous</label>
+                </div>
+            </div>
+            <button type="submit" class="set-btn">Set</button>
+        </form>
+
+    </div>
+    <div class="choices-container">
+        <h1>Choices</h1>
+
+        <div class="choices">
+            {% for choice in poll.pollchoice_set.all %}
+            <div class="choice-content">
+                <div class="choices-box" >{{choice.value}}</div>
+                <div data-link="{% url 'delete_choice' choice.id %}" class="plus-btn"><i class="fa-solid fa-trash"></i></div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <form action=" "method="post" class="add-choice">
+        {% csrf_token %}
+            <input type="hidden" name="question" value="{{poll.id}}">
+            <input autocomplete="off" name="value" class="choices-box" type="text" placeholder="Add Choice">
+            <button type="submit" class="plus-btn"><i class="fa-solid fa-plus"></i></button>
+        </form>
+        <div id="choice-errors" class="error-message">&nbsp;</div> 
+
+    </div>
+    <script defer src="{% static 'scripts/createQuestion.js' %}"></script>
+</main>
 
 
-
-{% if poll%}
-<h1>
-    Add Choice
-</h1>
-
-{% for choice in poll.pollchoice_set.all %}
-    {{ choice }} <br>
-{% endfor %}
-
-<form action="" method="POST">
-    {% csrf_token %}
-    <input type="hidden" name="question" value="{{poll.id}}">
-    <input type="text" name="value">
-    <button type="submit">Create Choice</button>
-</form>
-{% endif %}
+{% endblock content %}
 

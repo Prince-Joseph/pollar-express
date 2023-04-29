@@ -1,5 +1,40 @@
+nav {
+    display: flex;
+    flex-direction: row;
+    max-width: 320px;
+    margin-inline: auto;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1%;
+    color: $light-text-color;
+
+    button {
+        display: flex;
+        gap: 5px;
+        width: fit-content;
+        cursor: pointer;
+        align-items: center;
+    }
+
+    .home{
+        align-items: baseline;
+    }
+
+    button{
+
+        border: none;
+        outline: none;
+        background-color: unset;
+        color: $light-text-color;
+        font-size: 1rem;
+        cursor: pointer;
+
+    }
+}
+
+
 #submit-page {
-    margin-top: 5%;
+    margin-top: 1%;
     @extend %dark-background;
 
     .header {

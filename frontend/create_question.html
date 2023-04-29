@@ -21,37 +21,52 @@
     <main id="create-question" class="desktop-view">
         <div class="set-question">
             <button class="choices-box">Back to Questions</button>
-            <h1>Set Question</h1>
-            <textarea class="choices-box" type="text"> </textarea>
-            <div class="text-characters">Maximum of 250 characters allowed</div>
-            <h1>Question Settings</h1>
-            <div class="duration-setter">
-                <p>Duration</p>
-                <div class="timer">
-                    <i class="fa-solid fa-hourglass"></i>
-                    <span>5:30</span>
+            
+            <form action="">
+                <h1>Set Question</h1>
+                <textarea class="choices-box" type="text"> </textarea>
+                <div class="text-characters">Maximum of 250 characters allowed</div>
+                <h1>Question Settings</h1>
+                <div class="duration-setter">
+                    <p>Duration</p>
+                    <div class="timer">
+                        <i class="fa-solid fa-hourglass"></i>
+                        <input type="text" class="choices-box">
+                    </div>
+                   <div class="error-message">Maximum of 250 characters allowed</div> 
                 </div>
-            </div>
-            <div class="votes-container">
-                <p>Votes</p>
-                <div>
-                    <input type="checkbox" id="Anonymous" name="Anonymous" value="Anonymous">
-                    <label for="Anonymous">Anonymous</label>
+                <div class="votes-container">
+                    <p>Votes</p>
+                    <div>
+                        <input type="checkbox" id="Anonymous" name="Anonymous" value="Anonymous">
+                        <label for="Anonymous">Anonymous</label>
+                    </div>
                 </div>
-            </div>
-            <button class="set-btn">Set</button>
+                <button class="set-btn">Set</button>
+            </form>
+
         </div>
         <div class="choices-container">
             <h1>Choices</h1>
             <div class="choices">
-                <div class="choices-box">Choice #1</div>
-                <div class=choices-box>Choice #2</div>
-                <div class="choices-box">Choice #3</div>
+
+                <div class="choice-content">
+                    <div class="choices-box">Choice #1</div>
+                    <div class="plus-btn"><i class="fa-solid fa-trash"></i></div>
+                </div>
+                <div class="choice-content">
+                    <div class="choices-box">Choice #2</div>
+                    <div class="plus-btn"><i class="fa-solid fa-trash"></i></div>
+                </div>
+
             </div>
-            <div class="add-choice">
+
+            <form action="" class="add-choice">
                 <input class="choices-box" type="text" placeholder="Add Choice">
                 <div class="plus-btn"><i class="fa-solid fa-plus"></i></div>
-            </div>
+            </form>
+            <div class="error-message">Maximum of 250 characters allowed</div> 
+
         </div>
     </main>
 </body>

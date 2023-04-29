@@ -1,9 +1,14 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block content %}
 <main id="admin_questions" class="desktop-view">
         
+   
     <div class="questions-container">
+        <button data-link="{% url 'lobby'%}" class="home">
+            <i class="fa-solid fa-house"></i>
+            <span >Home</span>
+        </button>
         <div class="header" >
             <h1>Questions</h1>
             <button data-link="{% url 'create_question' %}"class="create-btn">Create</button>
@@ -15,7 +20,6 @@
             <div class="info-header">
                 <div class="time">
                     {% if poll.is_active %}
-                        
                       {{poll.time_left}} 
                         {% else  %}
                       {{poll.duration}}
@@ -23,10 +27,16 @@
 
                 </div>
                 {% if poll.is_active %}
-                <div class="active-box">Active</div>
+                <div   class="active-box">Active</div>
+                {% endif %}
+
+                {% if not poll.has_votes %}
+                <div   class="new-box">New</div>
                 {% endif %}
             </div>
-            <div class="main-question">{{poll.question}}</div>
+            <div class="main-question">
+                {{poll.question}}
+            </div>
         </div>
         {% endfor %}
 
@@ -35,14 +45,16 @@
 
     <div class="filters-container">
         <h1>Sort</h1>
-        <div class="filter-btn active-filter-btn">Newest First</div>
-        <div class="filter-btn">Oldest First</div>
+        <div data-params="sort"  data-sort-value="dn" class="filter-btn active-filter-btn">Newest First</div>
+        <div data-params="sort" data-sort-value="do"  class="filter-btn">Oldest First</div>
         <h1>Show only</h1>
-        <div class="filter-btn">Completed</div>
-        <div class="filter-btn">New</div>
-        <div class="filter-btn">Active</div>
+        <div data-params="status" data-status-value ="completed" class="filter-btn">Completed</div>
+        <div  data-params="status" data-status-value ="new" class="filter-btn">New</div>
+        <div data-params="status" data-status-value="active"  class="filter-btn">Active</div>
     </div>
 </main>
+
+<script defer src="{% static 'scripts/paramizer.js' %}"></script>
 {% endblock content %}
 
     
