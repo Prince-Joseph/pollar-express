@@ -1,55 +1,37 @@
-<main id="splash-screen">
-    <div class="main-div">
-    <div class="splash-img">
-        <img src="./static/media/splash_screen.png" alt="#">
-        <div class="splash-header">
-            <p class="pollar-header">Pollar </p>
-            <p class="express-header">Express</p>
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    
+<main id="splash">
+    <div class="pink-padding"></div>    
+    <div class="image-container">
+        
+        <img src="{% static 'media/splash_screen.png' %}" alt="#">
+        
+      <div class="header-text">
+          <p class="pollar">Pollar </p>
+          <p class="express">Express</p>
         </div>
-    </div>
-    <div class="splash-heading-box">
+        
         <form action="/accounts/google/login/" method="post">
-            {% csrf_token %}
-            <button type="submit" class="login-with-google-btn">
-                Sign In with Google
-            </button>
+        {% csrf_token %}
+        <button type="submit" class="login-with-google-btn">
+            Sign In with Google
+          </button>
         </form>
-       
-        <div class="company-name">
-            <div class="orange-color">
-            </div>
-            <div class="blue-color">
-                <p >made by </p>
-                <p >Seraphix</p>
-            </div>
-
-        </div>
-    </div>
-    </div>
-</main>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  
+        
+      </div>
+      <footer>
+          <p>
+              made by 
+            </p>
+            <p>
+                Seraphix
+            </p>
+      </footer>
+    </main>
+{% endblock content %}
 
 <!-- <h1>
     TRAIN PAGE

@@ -1,11 +1,23 @@
+body{
+    // background-color: #F74CBA;
+}
 #splash-screen {
-    margin: 0px;
-    max-width: none !important;
+    border: 2px solid greenyellow;
+    margin: auto;
+    max-width: 360px !important;
+    background-color: #131929;
+    height: 100vh;
+    overflow: hidden;
 
-    .main-div {
-        width: 100%;
-        display:flex;
-        flex-direction: column;
+    display:grid;
+    grid-template-rows: auto 450px auto;
+    .img-fill{
+        background-color: #f74cba;
+    }
+
+
+    .central-content{
+        border: 2px solid red;
     }
 
     .splash-img {
@@ -17,6 +29,8 @@
             width: 100%;
             object-fit: contain;
         }
+
+
 
         .splash-header {
             position: relative;
@@ -44,6 +58,9 @@
 
     .splash-heading-box {
         background-color: rgb(253, 253, 251);
+        border: 2px solid #f74cba;
+        height: 100%;
+
         // width: 350px;
         form{
             display: grid;
@@ -95,81 +112,37 @@
         }
 
 
-        .company-name {
-            max-width: 50px;
-            .orange-color {
-                background-color: $primary-color;
-                height: 15px;
-            }
-
-            .blue-color {
-                background-color: $background-color;
-                color: white;
-                padding:10px 0;
-
-                p {
-                    font-family: $base-font;
-                    font-size: 12px;
-                    display: flex;
-                    justify-content: center;
-                    font-weight: 600;
-                }
-                
-                p:nth-child(2){
-                    font-size: 16px;
-                }
-
-
-
-            }
-        }
-
+  
 
     }
 
-    //     @media screen and ( min-width:1000px) {
-    //         .main-div{
-    //             border: 1px solid green;
-    //         margin: 10px 0;
-    //         width: 1190px !important; 
-    //         margin-inline: auto;
-    //         display: grid;
-    //         grid-template-columns: 500px 270px;
-    //         width: 80%;
-    //         height: 100vh;
+    footer{
 
-    //         .splash-img{
-    //             img{
-    //                 margin: 0;
-    //                 width: 100%;
-    //             }
-    //         }
+        .orange-bar {
+            background-color: $primary-color;
+            height: 15px;
+        }
 
-    //         .splash-heading-box{
-    //             // height: 79vh;
-    //             width: 270px;
-    //             margin: 80px 0;
-    //             // align-items: center;
-    //             .login-with-google-btn{
-    //                 margin: 78px 11px;
-    //             }
-    //             .splash-header{
-    //                 margin-inline: auto;
-    //             }
-    //         }
+        .blue-bar {
+            background-color: $background-color;
+            color: white;
+            padding:10px 0;
 
-    //         .company-name{
-    //             margin-top: 70px;
-
-    //             .blue-color{
-    //                 height: 76px;
-    //                 display: grid;
-    //                 place-content: center;
-    //             }
-    //         }
-    //     }
-    // }
+            p {
+                font-family: $base-font;
+                font-size: 12px;
+                display: flex;
+                justify-content: center;
+                font-weight: 600;
+            }
+            
+            p:nth-child(2){
+                font-size: 16px;
+            }
 
 
+
+        }
+    }
 
 }

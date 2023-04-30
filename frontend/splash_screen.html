@@ -19,33 +19,40 @@
 </head>
 <body>
     <main id="splash-screen">
-        <div class="main-div">
-        <div class="splash-img">
-            <img src="./static/media/splash_screen.png" alt="#">
-            <div class="splash-header">
-                <p class="pollar-header">Pollar </p>
-                <p class="express-header">Express</p>
+            <div class="img-fill">45</div>
+
+            <div class="central-content">
+
+            <div class="splash-img">
+                <img src="./static/media/splash_screen.png" alt="#">
+                <!-- <div class="splash-header">
+                    <p class="pollar-header">Pollar </p>
+                    <p class="express-header">Express</p>
+                </div> -->
             </div>
-        </div>
-        <div class="splash-heading-box">
-            <form action="/accounts/google/login/" method="post">
-                <!-- {% csrf_token %} -->
-                <button type="submit" class="login-with-google-btn">
-                    Sign In with Google
-                </button>
-            </form>
-           
-            <div class="company-name">
-                <div class="orange-color">
-                </div>
-                <div class="blue-color">
-                    <p >made by </p>
-                    <p >Seraphix</p>
-                </div>
+
+             <div class="splash-heading-box">
+                <form action="/accounts/google/login/" method="post">
+                    <button type="submit" class="login-with-google-btn">
+                        Sign In with Google
+                    </button>
+                </form>
+            
 
             </div>
+
         </div>
-        </div>
+        <footer>
+            <div class="orange-bar">
+            </div>
+            <div class="blue-bar">
+                <p>made by </p>
+                <p>Seraphix</p>
+            </div>
+
+        </footer>
+
+
     </main>
 </body>
 </html>
