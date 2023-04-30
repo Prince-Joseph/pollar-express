@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-36g!kjw!yw1!m=$$7r#6jxnn0xdy_jk((4wd+@c_bblwra&am_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['seraphix.live','172.232.71.36']
 
 
 # Application definition
